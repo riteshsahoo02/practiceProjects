@@ -1,6 +1,0 @@
-streamlit
-seaborn
-pandas
-matplotlib
-emoji
-wordcloud
