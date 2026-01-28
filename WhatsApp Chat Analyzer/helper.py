@@ -3,6 +3,18 @@ from wordcloud import WordCloud
 import pandas as pd
 from collections import Counter
 import emoji
+
+import os
+base_dir = os.path.dirname(__file__)
+file_path = os.path.join(base_dir, "stop_hinglish.txt")
+try:
+    with open(file_path, 'r', encoding='utf-8') as f:
+        stop_words = f.read().splitlines()
+except FileNotFoundError:
+    stop_words = []
+    import streamlit as st
+    st.warning("stop_hinglish.txt not found. Stopwords list is empty.")
+    
 def fetch_stats(selected_user,df):
 
     if selected_user != 'Overall':
@@ -33,9 +45,6 @@ def most_busy_users(df):
     return x,df
 
 def create_wordcloud(selected_user,df):
-    f = open("stop_hinglish.txt",'r')
-    stop_words = f.read()
-
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
 
@@ -55,9 +64,6 @@ def create_wordcloud(selected_user,df):
     return df_wc
 
 def most_common_words(selected_user,df):
-    f = open("stop_hinglish.txt",'r')
-    stop_words = f.read()
-
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
     
@@ -119,4 +125,5 @@ def activity_heatmap(selected_user,df):
         df = df[df['user'] == selected_user]
     
     user_heatmap = df.pivot_table(index='day_name',columns='period',values='message',aggfunc='count').fillna(0)
+
     return user_heatmap
