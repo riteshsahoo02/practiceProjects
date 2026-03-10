@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Listener</title>
+    <style>
+        .btn{
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Let's Learn Event Listener today.</h1>
+    <p id="p1">Count: 0</p>
+    <button class="btn">Start Learning</button>
+<script>
+    const btn = document.querySelector('.btn')
+    let count = 0;
+    btn.addEventListener('click',()=>{
+        const p1 = document.getElementById('p1');
+        p1.innerText = `Count: ${++count}`;
+        console.log("you clicked the button");
+        const div = document.createElement('div')
+        div.innerText = `Count is ${count}`
+        Object.assign(div.style, {
+            color: 'white',
+            backgroundColor: 'green',
+            padding: '10px 12px',
+            width: '20%',
+            margin: '10px',
+            borderRadius: '10px',
+            fontSize: '1.2rem'
+        });
+        document.body.appendChild(div);
+    })
+    console.log(btn);
+</script>
+</body>
+</html>
